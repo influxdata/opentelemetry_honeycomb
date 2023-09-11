@@ -63,7 +63,7 @@ defmodule OpenTelemetry.Honeycomb.MixProject do
       {:opentelemetry, "~> 0.5.0"},
       {:opentelemetry_api, "~> 0.5.0"},
       {:poison, ">= 1.5.0", optional: true},
-      {:telemetry, "~> 0.4.0"}
+      {:telemetry, ">= 0.4.0"}
     ]
   end
 
