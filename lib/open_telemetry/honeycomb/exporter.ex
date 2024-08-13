@@ -60,22 +60,21 @@ defmodule OpenTelemetry.Honeycomb.Exporter do
   def shutdown(_), do: :ok
 
   @impl :otel_exporter
-  def export(tab, resource, config) do
-    tab
-    |> :ets.tab2list()
-    |> export_loaded(resource, config)
+  def export(traces, tab, resource, config) do
+    export_loaded(traces, :ets.tab2list(tab), resource, config)
   end
 
   @spec export_loaded(
+          traces :: :opentelemetry.traces() |:opentelemetry.metrics(),
           spans :: [:opentelemetry.span()],
           resource :: :otel_resource.t(),
           config :: Config.t()
         ) :: :ok | :success | :failed_not_retryable | :failed_retryable
-  defp export_loaded(spans, resource, config)
+  defp export_loaded(_, spans, resource, config)
 
-  defp export_loaded([], _, _), do: :ok
+  defp export_loaded(_,[], _, _), do: :ok
 
-  defp export_loaded(spans, resource, config) do
+  defp export_loaded(_,spans, resource, config) do
     resource_attributes = :otel_resource.attributes(resource) |> Attributes.sort()
     attribute_map = config[:attribute_map]
     cook = fn otel_span -> Event.from_otel_span(otel_span, resource_attributes, attribute_map) end

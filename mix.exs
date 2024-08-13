@@ -2,7 +2,7 @@ defmodule OpenTelemetry.Honeycomb.MixProject do
   use Mix.Project
 
   @description "Integration between OpenTelemetry and Honeycomb"
-  @version "0.5.0-rc.1"
+  @version "0.6.0"
 
   def project do
     [
@@ -50,18 +50,19 @@ defmodule OpenTelemetry.Honeycomb.MixProject do
 
   defp deps() do
     [
-      {:credo, "~> 1.4.0", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
+      {:credo, "~> 1.7", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.4", only: :dev, runtime: false},
       {:ex_doc, ">= 0.21.3", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.12.3", only: :test, runtime: false},
-      {:licensir, "~> 0.6.1", only: :dev, runtime: false},
-      {:mix_test_watch, "~> 1.0.2", only: :dev, runtime: false},
-      {:mox, "~> 0.5.1", only: :test, runtime: false},
+      {:excoveralls, "~> 0.18", only: :test, runtime: false},
+      {:licensir, "~> 0.7", only: :dev, runtime: false},
+      {:mix_test_interactive, "~> 3.0", only: :dev, runtime: false},
+      {:mox, "~> 1.1", only: :test, runtime: false},
+
       # versions for runtime dependencies deliberately set as low as possible:
       {:hackney, ">= 1.11.0", optional: true},
       {:jason, ">= 1.0.0", optional: true},
-      {:opentelemetry, "~> 0.5.0"},
-      {:opentelemetry_api, "~> 0.5.0"},
+      {:opentelemetry, ">= 0.5.0"},
+      {:opentelemetry_api, ">= 0.5.0"},
       {:poison, ">= 1.5.0", optional: true},
       {:telemetry, ">= 0.4.0"}
     ]
